@@ -82,7 +82,7 @@ class BlogComment(models.Model):
     blog_entry = models.ForeignKey('BlogInstance', on_delete=models.SET_NULL, null=True)
     user_name = models.ForeignKey('BlogReader', on_delete=models.SET_NULL, null=True)
     comment = models.TextField(max_length=200)
-    comment_date = models.DateField(auto_now=True, null=True, blank=True)
+    comment_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ['comment_date']
