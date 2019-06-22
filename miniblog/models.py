@@ -29,6 +29,7 @@ class BlogInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular blog entry across whole blog')
     blog = models.ForeignKey('Blog', on_delete=models.SET_NULL, null=True) 
     blog_title = models.CharField(max_length=200)
+    blogger = models.ForeignKey('Blogger', on_delete=models.SET_NULL, null=True)
     blog_entry_date = models.DateField(null=True, blank=True)
 
     blog_entry = models.TextField(max_length=5000, help_text='Start your blog entry here', null=True)
@@ -42,7 +43,7 @@ class BlogInstance(models.Model):
 
 
 class Blogger(models.Model):
-    """Model representing an author."""
+    """Model representing a blogger."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     bio = models.CharField(max_length=1000, help_text='Tell us about yourself', null=True)
@@ -58,6 +59,22 @@ class Blogger(models.Model):
         """String for representing the Model object."""
         return f'{self.last_name}, {self.first_name}'
 
+class BlogReader(models.Model):
+    """Model representing a blog reader."""
+    user_name = models.CharField(max_length=100)
+    profile_description = models.CharField(max_length=1000, help_text='Tell us about yourself', null=True)
+
+    class Meta:
+        ordering = ['user_name']
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular blogger instance."""
+        return reverse('blogreader-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.user_name}'
+
 
 class BlogComment(models.Model):
     """Model for the blog comments that are attached to a specific blog entry"""
@@ -71,4 +88,4 @@ class BlogComment(models.Model):
     
     def __str__(self):
         """String for Blog Comments"""
-        return f'{self.id} ({self.blog_entry.title})'
+        return f'{self.id} ({self.blog_entry.blog_title})'

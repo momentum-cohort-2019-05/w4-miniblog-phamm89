@@ -1,5 +1,5 @@
 from django.contrib import admin
-from miniblog.models import Blog, BlogInstance, Blogger, BlogComment
+from miniblog.models import Blog, BlogInstance, Blogger, BlogReader, BlogComment
 
 # Register models
 
@@ -10,16 +10,22 @@ class BlogAdmin(admin.ModelAdmin):
     pass
 
 # admin.site.register(BlogInstance)
-# Register the Admin classes for BookInstance using the decorator
+# Register the Admin classes for BlogInstance using the decorator
 @admin.register(BlogInstance) 
 class BlogInstanceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('blog', 'blog_title', 'blogger', 'blog_entry_date')
 
-# Define the admin class
+# Register the Admin class for Blogger
 # admin.site.register(Blogger)
 class BloggerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('last_name', 'first_name', 'bio')
 # Register the admin class with the associated model
 admin.site.register(Blogger, BloggerAdmin)
+
+# Register the Admin classes for BlogReader 
+class BlogReaderAdmin(admin.ModelAdmin):
+    list_display = ('user_name', 'profile_description')
+# Register the admin class with the associated model
+admin.site.register(BlogReader, BlogReaderAdmin)
 
 admin.site.register(BlogComment)
