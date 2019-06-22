@@ -22,10 +22,13 @@ class BloggerAdmin(admin.ModelAdmin):
 # Register the admin class with the associated model
 admin.site.register(Blogger, BloggerAdmin)
 
-# Register the Admin classes for BlogReader 
+# Register the Admin class for BlogReader 
 class BlogReaderAdmin(admin.ModelAdmin):
     list_display = ('user_name', 'profile_description')
 # Register the admin class with the associated model
 admin.site.register(BlogReader, BlogReaderAdmin)
 
+# Register the Admin class for BlogComment
+class BlogCommentAdmin(admin.ModelAdmin):
+    list_display = ('user_name', 'blog_entry', 'comment_date')
 admin.site.register(BlogComment)

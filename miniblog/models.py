@@ -80,6 +80,7 @@ class BlogComment(models.Model):
     """Model for the blog comments that are attached to a specific blog entry"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for the comments.')
     blog_entry = models.ForeignKey('BlogInstance', on_delete=models.SET_NULL, null=True)
+    user_name = models.ForeignKey('BlogReader', on_delete=models.SET_NULL, null=True)
     comment = models.TextField(max_length=200)
     comment_date = models.DateField(auto_now=True, null=True, blank=True)
 
