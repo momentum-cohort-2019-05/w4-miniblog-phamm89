@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Flying Toward Your Destiny Homepage</h1>
+  <p>Welcome to Flying Toward Your Destiny!</p>
+  <p></p>
+  <h2>Our Current Blog Community:</h2>
+  <ul>
+    <li><strong>Blogs:</strong> {{ num_blog }}</li>
+    <li><strong>Blog Posts:</strong> {{ num_bloginstance }}</li>
+    <li><strong>Bloggers:</strong> {{ num_blogger }}</li>
+    <li><strong>Blog Readers</strong> {{ num_blogreader }}</li>
+  </ul>
+{% endblock %}
