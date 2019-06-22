@@ -1,3 +1,9 @@
 from django.contrib import admin
+from miniblog.models import Blog, BlogInstance, Blogger, BlogComment
 
-# Register your models here.
+# Register models
+
+admin.site.register(Blog)
+admin.site.register(BlogInstance)
+admin.site.register(Blogger)
+admin.site.register(BlogComment)
