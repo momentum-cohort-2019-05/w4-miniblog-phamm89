@@ -28,7 +28,7 @@ class BlogInstance(models.Model):
     """Model representing a specific blog entry."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular blog entry across whole blog')
     blog = models.ForeignKey('Blog', on_delete=models.SET_NULL, null=True) 
-    imprint = models.CharField(max_length=200)
+    blog_title = models.CharField(max_length=200)
     blog_entry_date = models.DateField(null=True, blank=True)
 
     blog_entry = models.TextField(max_length=5000, help_text='Start your blog entry here', null=True)
