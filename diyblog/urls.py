@@ -25,6 +25,7 @@ urlpatterns = [
     path('blog/', miniblog_views.index, name='index'),
     path('', RedirectView.as_view(url='/index/', permanent=True)),
     path('blog/blogs', miniblog_views.BlogInstanceListView.as_view(), name='blogs'),
+    path('blog/blogs/<uuid:pk>', miniblog_views.BlogInstanceDetailView.as_view(), name='blog-detail'),
     path('blog/bloggers', miniblog_views.BloggerListView.as_view(), name='bloggers'),
     path('blog/bloggers/<int:pk>', miniblog_views.BloggerDetailView.as_view(), name='blogger-detail'),
     path('blog/blogreaders', miniblog_views.BlogReaderListView.as_view(), name='blogreaders'),
