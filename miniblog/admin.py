@@ -14,13 +14,15 @@ class BlogInstanceInline(admin.TabularInline):
 # Register the Admin classes for Blog using the decorator
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'blogger')
+    fields = ['title', 'blogger', 'summary']
     inlines = [BlogInstanceInline]
 
 # Register the Admin classes for BlogInstance using the decorator
 @admin.register(BlogInstance) 
 class BlogInstanceAdmin(admin.ModelAdmin):
     list_display = ('blog_title', 'blog', 'blogger', 'blog_entry_date')
-    fields = ['blog_title', 'blog', 'blogger', 'blog_entry_date']
+    fields = ['blog_title', 'blog', 'blogger', 'blog_entry_date', 'blog_entry']
     inlines = [BlogCommentInline]
 
 # Register the Admin class for Blogger
@@ -40,6 +42,6 @@ admin.site.register(BlogReader, BlogReaderAdmin)
 
 # Register the Admin class for BlogComment
 class BlogCommentAdmin(admin.ModelAdmin):
-    list_display = ('blog_entry', 'user_name', 'comment_date')
-    fields = ['blog_entry', 'user_name', 'comment_date']
+    list_display = ('blog_entry', 'user_name', 'comment', 'comment_date')
+    fields = ['blog_entry', 'user_name', 'comment', 'comment_date']
 admin.site.register(BlogComment, BlogCommentAdmin)
