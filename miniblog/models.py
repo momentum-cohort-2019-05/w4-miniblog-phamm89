@@ -35,7 +35,7 @@ class BlogInstance(models.Model):
     blog_entry = models.TextField(max_length=5000, help_text='Start your blog entry here', null=True)
 
     class Meta:
-        ordering = ['blog_entry_date']
+        ordering = ['-blog_entry_date']
 
     def __str__(self):
         """String for representing the Model object."""
@@ -57,7 +57,7 @@ class Blogger(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.last_name}, {self.first_name}'
+        return f'{self.first_name} {self.last_name}'
 
 class BlogReader(models.Model):
     """Model representing a blog reader."""

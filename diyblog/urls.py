@@ -22,7 +22,10 @@ from miniblog import views as miniblog_views
 
 urlpatterns = [
     path('', miniblog_views.index, name='index'),
+    path('blog/', miniblog_views.index, name='index'),
     path('', RedirectView.as_view(url='/index/', permanent=True)),
+    path('blog/blogs', miniblog_views.BlogInstanceListView.as_view(), name='blogs'),
+    path('blog/bloggers', miniblog_views.BloggerListView.as_view(), name='bloggers'),
     path('admin/', admin.site.urls),
 ]
 
