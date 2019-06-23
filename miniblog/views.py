@@ -33,5 +33,14 @@ class BlogInstanceListView(generic.ListView):
 
 class BloggerListView(generic.ListView):
     model = Blogger
+
+class BloggerDetailView(generic.DetailView):
+    model = Blogger
+
+class BlogReaderListView(generic.ListView):
+    model = BlogReader
+
+class BlogReaderDetailView(generic.DetailView):
+    model = BlogReader
     
 

@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Blog Reader: {{ blogreader.user_name}} </h1>
+    <br>
+    <br>
+  <p><strong>Profile Description:</strong> {{ blogreader.profile_description }}</p> 
+
+  <!-- <div style="margin-left:20px;margin-top:20px">
+    <h4>Blogs List</h4>
+
+    {% for blog in blog.bloginstance_set.all %}
+      <hr>
+      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+      {% if copy.status != 'a' %}
+        <p><strong>Due to be returned:</strong> {{copy.due_back}}</p>
+      {% endif %}
+      <p><strong>Imprint:</strong> {{copy.imprint}}</p>
+      <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    {% endfor %} -->
+  </div>
+{% endblock %}
