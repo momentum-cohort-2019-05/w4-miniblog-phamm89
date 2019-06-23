@@ -27,12 +27,14 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
+
 class BlogInstanceListView(generic.ListView):
     model = BlogInstance
     paginate_by = 5
 
 class BlogInstanceDetailView(generic.DetailView):
     model = BlogInstance
+    
 
 class BloggerListView(generic.ListView):
     model = Blogger

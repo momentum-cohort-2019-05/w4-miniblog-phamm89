@@ -125,3 +125,9 @@ INTERNAL_IPS = ['127.0.0.1']
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+
+# Stores emails to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
