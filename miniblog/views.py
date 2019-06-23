@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from miniblog.models import Blog, BlogInstance, Blogger, BlogReader, BlogComment
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -34,7 +37,7 @@ class BlogInstanceListView(generic.ListView):
 
 class BlogInstanceDetailView(generic.DetailView):
     model = BlogInstance
-    
+
 
 class BloggerListView(generic.ListView):
     model = Blogger
@@ -42,10 +45,16 @@ class BloggerListView(generic.ListView):
 class BloggerDetailView(generic.DetailView):
     model = Blogger
 
-class BlogReaderListView(generic.ListView):
+class BlogReaderListView(LoginRequiredMixin, generic.ListView):
     model = BlogReader
 
-class BlogReaderDetailView(generic.DetailView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
+
+class BlogReaderDetailView(LoginRequiredMixin, generic.DetailView):
     model = BlogReader
+
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     
 
