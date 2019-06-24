@@ -1,5 +1,5 @@
 from django.contrib import admin
-from miniblog.models import Blog, BlogInstance, Blogger, BlogReader, BlogComment
+from miniblog.models import Blog, Blogger, BlogReader, BlogComment
 
 # Register models
 
@@ -7,29 +7,18 @@ from miniblog.models import Blog, BlogInstance, Blogger, BlogReader, BlogComment
 class BlogCommentInline(admin.TabularInline):
     model = BlogComment
 
-# Register BlogInstance as an inline to the Blogger and Blog
-class BlogInstanceInline(admin.TabularInline):
-    model = BlogInstance
-
 # Register the Admin classes for Blog using the decorator
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'blogger')
-    fields = ['title', 'blogger', 'summary']
-    inlines = [BlogInstanceInline]
-
-# Register the Admin classes for BlogInstance using the decorator
-@admin.register(BlogInstance) 
-class BlogInstanceAdmin(admin.ModelAdmin):
-    list_display = ('blog_title', 'blog', 'blogger', 'blog_entry_date')
-    fields = ['blog_title', 'blog', 'blogger', 'blog_entry_date', 'blog_entry']
+    list_display = ('blog_title', 'blogger', 'blog_entry_date')
+    fields = ['blog_title', 'blogger', 'blog_entry_date', 'blog_entry']
     inlines = [BlogCommentInline]
 
 # Register the Admin class for Blogger
 class BloggerAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'bio')
     fields = ['first_name', 'last_name', 'bio']
-    inlines = [BlogInstanceInline]
+    
 # Register the admin class with the associated model
 admin.site.register(Blogger, BloggerAdmin)
 

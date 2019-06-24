@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  <h1>{{ blog.blog_title}} </h1>
+    <br>
+  <p><strong>Blogger</strong>: {{ blog.blogger }}</p>
+  <p><strong>Published</strong>: {{ blog.blog_entry_date }}</p>
+    <br>
+    <br>
+  <p><strong>Blog Entry:</strong></p>
+    <br>
+  <p>{{ blog.blog_entry}}</p>
+  </div>
+{% endblock %}
+

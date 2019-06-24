@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from miniblog.models import Blog, BlogInstance, Blogger, BlogReader, BlogComment
+from miniblog.models import Blog, Blogger, BlogReader, BlogComment
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -31,13 +31,12 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-class BlogInstanceListView(generic.ListView):
-    model = BlogInstance
+class BlogListView(generic.ListView):
+    model = Blog
     paginate_by = 5
 
-class BlogInstanceDetailView(generic.DetailView):
-    model = BlogInstance
-
+class BlogDetailView(generic.DetailView):
+    model = Blog
 
 class BloggerListView(generic.ListView):
     model = Blogger

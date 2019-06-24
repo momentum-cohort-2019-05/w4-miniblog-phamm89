@@ -1,6 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
-from miniblog.models import Blog, BlogInstance, Blogger, BlogReader, BlogComment
+from miniblog.models import Blog, Blogger, BlogReader, BlogComment
 
 class BlogCommentForm(ModelForm):
     class Meta:

@@ -7,39 +7,28 @@ import uuid # Required for unique blog instances
 
 class Blog(models.Model):
     """Model representing a blog, but not a specific entry of a blog."""
-    title = models.CharField(max_length=200)
+    blog_title = models.CharField(max_length=200)
 
     # Foreign Key used because blog can only have one blogger, but bloggers can have multiple blogs
     # Blogger as a string rather than object because it hasn't been declared yet in the file
     blogger = models.ForeignKey('Blogger', on_delete=models.SET_NULL, null=True)
     
-    summary = models.TextField(max_length=1000, help_text='Enter a brief summary of the blog entry')
-    
-    def __str__(self):
-        """String for representing the Model object."""
-        return self.title
-    
-    def get_absolute_url(self):
-        """Returns the url to access a detail record for this blog."""
-        return reverse('blog-detail', args=[str(self.id)])
-
-
-class BlogInstance(models.Model):
-    """Model representing a specific blog entry."""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular blog entry across whole blog')
-    blog = models.ForeignKey('Blog', on_delete=models.SET_NULL, null=True) 
-    blog_title = models.CharField(max_length=200)
-    blogger = models.ForeignKey('Blogger', on_delete=models.SET_NULL, null=True)
+    # Blog Entry Date
     blog_entry_date = models.DateField(null=True, blank=True)
 
+    # Blog post
     blog_entry = models.TextField(max_length=5000, help_text='Start your blog entry here', null=True)
-
+    
     class Meta:
         ordering = ['-blog_entry_date']
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.id} ({self.blog.title})'
+        return self.blog_title
+    
+    def get_absolute_url(self):
+        """Returns the url to access a detail record for this blog."""
+        return reverse('blog-detail', args=[str(self.id)])
 
 
 class Blogger(models.Model):
@@ -79,7 +68,7 @@ class BlogReader(models.Model):
 class BlogComment(models.Model):
     """Model for the blog comments that are attached to a specific blog entry"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for the comments.')
-    blog_entry = models.ForeignKey('BlogInstance', on_delete=models.SET_NULL, null=True)
+    blog_entry = models.ForeignKey('Blog', on_delete=models.SET_NULL, null=True)
     user_name = models.ForeignKey('BlogReader', on_delete=models.SET_NULL, null=True)
     comment = models.TextField(max_length=200)
     comment_date = models.DateTimeField(null=True, blank=True)
