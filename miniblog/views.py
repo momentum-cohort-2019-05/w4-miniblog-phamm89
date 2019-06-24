@@ -12,7 +12,6 @@ def index(request):
 
     # Generate counts of some of the main objects
     num_blog = Blog.objects.all().count()
-    num_bloginstance = BlogInstance.objects.all().count()
     
     # The 'all()' is implied by default. 
     num_blogger = Blogger.objects.count()
@@ -21,7 +20,6 @@ def index(request):
 
     context = {
         'num_blog': num_blog,
-        'num_bloginstance': num_bloginstance,
         'num_blogger': num_blogger,
         'num_blogreader': num_blogreader,
         'num_blogcomment': num_blogcomment,

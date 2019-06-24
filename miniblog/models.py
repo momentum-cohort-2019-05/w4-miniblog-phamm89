@@ -41,7 +41,7 @@ class Blogger(models.Model):
         ordering = ['last_name', 'first_name']
 
     def get_absolute_url(self):
-        """Returns the url to access a particular blogger instance."""
+        """Returns the url to access a particular blog."""
         return reverse('blogger-detail', args=[str(self.id)])
 
     def __str__(self):
