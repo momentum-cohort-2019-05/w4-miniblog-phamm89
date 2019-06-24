@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 import uuid # Required for unique blog instances
+from django.template.defaultfilters import truncatechars
+from django.utils import timezone
 
 # Models created here
 
@@ -71,11 +73,18 @@ class BlogComment(models.Model):
     blog_entry = models.ForeignKey('Blog', on_delete=models.SET_NULL, null=True)
     user_name = models.ForeignKey('BlogReader', on_delete=models.SET_NULL, null=True)
     comment = models.TextField(max_length=200)
-    comment_date = models.DateTimeField(null=True, blank=True)
+    comment_date = models.DateTimeField(default=timezone.now)
+    
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return truncatechars(self.comment, 75)
 
     class Meta:
         ordering = ['comment_date']
     
-    def __str__(self):
-        """String for Blog Comments"""
-        return f'{self.id} ({self.blog_entry.blog_title})'
+    def get_absolute_url(self):
+        """Returns the url to access a particular blogger instance."""
+        return reverse('create', args=[str(self.id)])
+    
+    

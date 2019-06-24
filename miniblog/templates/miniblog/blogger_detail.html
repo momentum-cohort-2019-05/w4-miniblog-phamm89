@@ -8,6 +8,15 @@
     <br>
     <br>
   <h4>Blog Contributions</h4>
-    <br> 
+  <br> 
+    
+    <ul>
+    {% for blog in blogger.blog_set.all %}
+    <li>
+      <a href="{{ blog.get_absolute_url }}">{{ blog.blog_title }}</a> ({{ blog.blog_entry_date }}) 
+    </li>
+    {% endfor %}
+    </ul>
+       
   </div>
   {% endblock %}

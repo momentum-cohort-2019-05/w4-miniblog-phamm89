@@ -3,6 +3,8 @@ from miniblog.models import Blog, Blogger, BlogReader, BlogComment
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -53,5 +55,21 @@ class BlogReaderDetailView(LoginRequiredMixin, generic.DetailView):
 
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
+
+
+class BlogCommentCreate(LoginRequiredMixin, CreateView):
+    model = BlogComment
+    fields = ['blog_entry', 'user_name', 'comment', 'comment_date']
+
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
+
+    def get_success_url(self):
+        return reverse_lazy('blog-detail', kwargs = {'pk': self.kwargs['pk']})
     
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(BlogCommentCreate, self).get_context_data(**kwargs)
+        context['blog'] = get_object_or_404(Blog, pk = self.kwargs['pk'])
+        return context
 
