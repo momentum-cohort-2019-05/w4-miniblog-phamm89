@@ -1,3 +1,7 @@
+# Miniblog Deployment
+
+https://flying-toward-your-destiny.herokuapp.com/
+
 # Django Miniblog
 
 For this assignment, go to [the MDN Django tutorial assessment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/django_assessment_blog) and follow the directions there to build a blog with Django. You **do not** have to create tests for this blog.
